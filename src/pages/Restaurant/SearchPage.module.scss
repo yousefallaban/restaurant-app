@@ -1,0 +1,31 @@
+.gridLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  align-items: start;
+  min-height: 100vh;
+
+  @include tablet-up {
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+  }
+}
+
+.sidebar {
+  background: #fff;
+  padding: 24px 16px;
+  position: static;
+  height: auto;
+
+  @include tablet-up {
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    margin-bottom: 0;
+  }
+}
+
+.mainContent {
+  min-width: 0;
+  padding: 24px 0;
+}

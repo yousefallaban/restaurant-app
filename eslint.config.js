@@ -14,12 +14,24 @@ export default defineConfig([
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'react/display-name': 'off',
     },
     settings: {
       react: {
         version: 'detect',
         runtime: 'automatic',
       },
+    },
+  },
+  {
+    files: ['vite.config.js'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        process: 'readonly',
+      },
+      sourceType: 'module',
     },
   },
   {
@@ -36,4 +48,15 @@ export default defineConfig([
       },
     },
   },
+  {
+    files: ['**/*.test.{js,mjs,cjs,jsx,ts,tsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+      parserOptions: {
+        sourceType: 'module',
+      },
+    },
+  }
 ]);

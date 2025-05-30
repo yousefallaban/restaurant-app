@@ -1,0 +1,87 @@
+:root {
+  --color-primary: #ff6700;
+  --color-primary-hover: #e65c00;
+  --color-text-light: #FFFFFFDD;
+  --color-text-dark: #213547;
+  --color-bg-dark: #242424;
+  --color-bg-light: #ffffff;
+  --color-link: #646cff;
+  --color-link-hover: #535bf2;
+
+  // Black palette
+  --color-bg: #fff;
+  --color-label: #111;
+  --color-input-text: #111;
+  --color-input-border: #343A40;
+  --color-input-border-hover: #333;
+  --color-input-border-focus: #000;
+  --color-helper: #555;
+  --color-error: #e53935;
+  --color-disabled-bg: #f3f3f3;
+  --color-disabled-text: #bbb;
+  --color-outline-focus: #111;
+
+  /* Main Brand Colors */
+  --btn-color-main: var(--color-primary);
+  --btn-color-main-hover: var(--color-primary-hover);
+  --btn-color-main-active: #cc5200;
+  --btn-color-main-text: #fff;
+
+  /* Outline (Default State) */
+  --btn-color-outline: #222;
+  --btn-color-outline-bg: transparent;
+
+  /* Outline (Hover/Active) */
+  --btn-color-outline-hover-bg: #fff6ee;
+  --btn-color-outline-hover-text: #e65c00;
+  --btn-color-outline-hover-border: #e65c00;
+
+  /* Disabled */
+  --btn-color-filled-disabled-bg: #ffd5b3;
+  --btn-color-filled-disabled-text: #fff;
+
+  --btn-color-outline-disabled-bg: transparent;
+  --btn-color-outline-disabled-text: #bcbcbc;
+  --btn-color-outline-disabled-border: #e0e0e0;
+}
+
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* Inputs default reset */
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  margin: 0;
+  color: inherit;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+h1, h2, h3, h4, h5, h6, span, p {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+}
+
+/* Links */
+a {
+  font-weight: 500;
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-link-hover);
+  outline: none;
+}
