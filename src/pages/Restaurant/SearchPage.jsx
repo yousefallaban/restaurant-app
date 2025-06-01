@@ -1,3 +1,4 @@
+import { Dropdown } from '@/ui/index.js';
 import React from 'react';
 
 import NotFound from '@/components/NotFound/NotFound.jsx';
@@ -18,7 +19,10 @@ const SearchPage = () => {
         <Sidebar />
       </aside>
       <main className={styles.mainContent}>
-        <RestaurantFilter />
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+          <RestaurantFilter />
+          <Dropdown />
+        </div>
         <Restaurants />
         <NotFound />
         <Pagination />

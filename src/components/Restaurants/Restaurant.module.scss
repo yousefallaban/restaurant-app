@@ -3,7 +3,7 @@
   flex-direction: column;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   padding: 12px;
 }
 
@@ -14,12 +14,46 @@
 }
 
 .name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .info {
   font-size: 14px;
   font-weight: 500;
+}
+
+.icon {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.star {
+  color: orange;
+  font-size: 16px;
+  margin-right: 6px;
+}
+
+.rating {
+  color: gray;
+  font-size: 16px;
+}
+
+.labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px;
+  color: #3c4c4f;
+  background: #f6c243;
+  text-align: center;
+  max-width: fit-content;
+  border-radius: 4px;
+  display: inline-block;
 }
 

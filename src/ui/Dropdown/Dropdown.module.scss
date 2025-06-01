@@ -1,0 +1,38 @@
+.dropdownGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.dropdownWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dropdownField {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--color-input-border);
+  background-color: var(--color-bg);
+  color: var(--color-input-text);
+  appearance: none;
+  transition: border-color 0.18s, background-color 0.18s;
+
+  &:hover {
+    border-color: var(--color-input-border-hover);
+    background-color: var(--color-bg); // keep same as input
+  }
+
+  &:focus {
+    border-color: var(--color-input-border-focus);
+    outline: none;
+  }
+}
+
+
