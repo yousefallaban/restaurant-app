@@ -7,19 +7,27 @@ export const useFilteredRestaurants = () => {
 
   return useMemo(() => {
     if (!Array.isArray(restaurants) || restaurants.length === 0) return [];
-    if (!filters?.query) return restaurants;
 
-    const q = filters.query.toLowerCase();
+    const rawQuery = filters?.query || '';
+    const q = rawQuery.trim().toLowerCase();
+
+    if (!q) return restaurants;
 
     return restaurants.filter((r) => {
-      const name = r.name ? r.name.toLowerCase() : '';
+      const name = (r.name || '').toLowerCase();
       const cuisines = Array.isArray(r.cuisines) ? r.cuisines : [];
-      const address = typeof r.address === 'string' ? r.address.toLowerCase() : '';
+      const address = r.address || {};
+
+      const city = (address.city || '').toLowerCase();
+      const firstLine = (address.firstLine || '').toLowerCase();
+      const postalCode = (address.postalCode || '').toLowerCase();
 
       return (
         name.includes(q) ||
-        cuisines.some((c) => (c.name ? c.name.toLowerCase().includes(q) : false)) ||
-        address.includes(q)
+        cuisines.some((c) => (c.name || '').toLowerCase().includes(q)) ||
+        city.includes(q) ||
+        firstLine.includes(q) ||
+        postalCode.includes(q)
       );
     });
   }, [restaurants, filters]);

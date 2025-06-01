@@ -43,9 +43,8 @@ const restaurantSlice = createSlice({
       state.error = null;
     },
     setFilter(state, action) {
-      // action.payload: { field, value }
       state.filters[action.payload.field] = action.payload.value;
-      state.page = 1; // Optional: reset page on filter change
+      state.page = 1;
     },
     clearFilters(state) {
       state.filters = {};

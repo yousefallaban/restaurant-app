@@ -10,7 +10,7 @@ import {
 
 const getRestaurantState = (state) => state.restaurants;
 
-// Saga to fetch data when postcode changes
+// fetch data when postcode changes
 function* fetchOnPostcodeChange() {
   const { postcode } = yield select(getRestaurantState);
   if (!postcode) return;
@@ -23,7 +23,7 @@ function* fetchOnPostcodeChange() {
   }
 }
 
-// Saga to sync URL when Redux changes
+// sync URL when Redux changes
 function* syncUrlWithRedux() {
   const { postcode, page } = yield select(getRestaurantState);
   const params = new URLSearchParams();

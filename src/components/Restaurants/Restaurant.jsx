@@ -13,10 +13,13 @@ const Restaurant = ({ data = {} }) => {
       <div className={styles.details}>
         <h2 className={styles.name}>{data.name}</h2>
 
-        <p className={styles.rating}>
+        <p className={styles.info}>
           Rating: {data.rating.starRating} ({data.rating.count})
         </p>
-        <p className={styles.cuisines}>
+        <p className={styles.info}>
+          {data.address.city}
+        </p>
+        <p className={styles.info}>
           {data.cuisines.map((c) => c.name).join(', ')}
         </p>
       </div>
