@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 16px 0;
+  font-size: 1.06rem;
+}
+
+.controller {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.pageInfo {
+  color: #2c2c2c;
+  min-width: 110px;
+  text-align: center;
+}

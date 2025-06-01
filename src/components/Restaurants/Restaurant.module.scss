@@ -1,0 +1,29 @@
+.restaurant {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 12px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.rating {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cuisines {
+  font-size: 14px;
+  color: #3d3d3d;
+}

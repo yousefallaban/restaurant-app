@@ -4,17 +4,32 @@ const initialState = {
   data: [],
   loading: false,
   error: null,
-  query: '',
+  postcode: '',
+  page: 1,
+  pageSize: 18,
+  filters: {
+    query: '',
+  },
 };
 
 const restaurantSlice = createSlice({
   name: 'restaurants',
   initialState,
   reducers: {
-    fetchRestaurantsRequest(state, action) {
+    setPostcode(state, action) {
+      state.postcode = action.payload;
+      state.page = 1;
       state.loading = true;
       state.error = null;
-      state.query = action.payload;
+    },
+    setPage(state, action) {
+      state.page = action.payload;
+      state.loading = true;
+      state.error = null;
+    },
+    fetchRestaurantsRequest(state) {
+      state.loading = true;
+      state.error = null;
     },
     fetchRestaurantsSuccess(state, action) {
       state.loading = false;
@@ -27,14 +42,26 @@ const restaurantSlice = createSlice({
     clearError(state) {
       state.error = null;
     },
+    setFilter(state, action) {
+      // action.payload: { field, value }
+      state.filters[action.payload.field] = action.payload.value;
+      state.page = 1; // Optional: reset page on filter change
+    },
+    clearFilters(state) {
+      state.filters = {};
+    },
   },
 });
 
 export const {
+  setPostcode,
+  setPage,
   fetchRestaurantsRequest,
   fetchRestaurantsSuccess,
   setError,
   clearError,
+  setFilter,
+  clearFilters,
 } = restaurantSlice.actions;
 
 export default restaurantSlice.reducer;

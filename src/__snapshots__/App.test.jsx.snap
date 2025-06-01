@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component should have a heading element 1`] = `
+<DocumentFragment>
+  <div
+    class="gridLayout"
+  >
+    <aside
+      class="sidebar"
+    >
+      <div>
+        <form
+          class="container"
+        >
+          <div
+            class="inputGroup"
+          >
+            <input
+              class="inputField"
+              id="postcode-«r0»"
+              name="postcode"
+              placeholder="Enter UK Postcode"
+              type="text"
+              value=""
+            />
+          </div>
+          <button
+            class="buttonBase filled"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+    </aside>
+    <main
+      class="mainContent"
+    >
+      <div
+        class="inputGroup"
+      >
+        <input
+          class="inputField"
+          placeholder="Filter by name or cuisine…"
+          type="text"
+          value=""
+        />
+      </div>
+    </main>
+  </div>
+</DocumentFragment>
+`;

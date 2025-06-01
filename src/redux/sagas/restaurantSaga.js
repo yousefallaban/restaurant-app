@@ -1,31 +1,39 @@
-import { call, put, takeLatest, cancelled } from 'redux-saga/effects';
+import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects';
 import { fetchRestaurantsByPostcode } from '@/api/restaurantApi.js';
 import {
+  setPostcode,
+  setPage,
   fetchRestaurantsRequest,
   fetchRestaurantsSuccess,
   setError,
 } from '../slices/restaurantSlice';
 
-function* fetchRestaurantsSaga(action) {
-  const controller = new AbortController();
+const getRestaurantState = (state) => state.restaurants;
 
+// Saga to fetch data when postcode changes
+function* fetchOnPostcodeChange() {
+  const { postcode } = yield select(getRestaurantState);
+  if (!postcode) return;
+  yield put(fetchRestaurantsRequest());
   try {
-    const restaurants = yield call(
-      fetchRestaurantsByPostcode,
-      action.payload,
-      controller.signal
-    );
+    const restaurants = yield call(fetchRestaurantsByPostcode, postcode);
     yield put(fetchRestaurantsSuccess(restaurants));
   } catch (error) {
-    const errorMessage = error?.message || 'Failed to fetch restaurants';
-    yield put(setError(errorMessage));
-  } finally {
-    if (yield cancelled()) {
-      controller.abort();
-    }
+    yield put(setError(error?.message || 'Failed to fetch restaurants'));
   }
 }
 
-export function* watchFetchRestaurants() {
-  yield takeLatest(fetchRestaurantsRequest.type, fetchRestaurantsSaga);
+// Saga to sync URL when Redux changes
+function* syncUrlWithRedux() {
+  const { postcode, page } = yield select(getRestaurantState);
+  const params = new URLSearchParams();
+  if (postcode) params.set('postcode', postcode);
+  if (page) params.set('page', page);
+  window.history.replaceState(null, '', `/restaurants?${params.toString()}`);
+}
+
+// Watchers
+export function* watchRestaurants() {
+  yield takeLatest(setPostcode.type, fetchOnPostcodeChange);
+  yield takeEvery([setPostcode.type, setPage.type], syncUrlWithRedux);
 }

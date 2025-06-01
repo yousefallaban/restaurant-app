@@ -1,69 +1,67 @@
-import * as useRestaurants from '@/hooks/useRestaurants.js';
-
-jest.mock('@/hooks/useRestaurants.js', () => ({
-  useRestaurantSearch: jest.fn(),
-}));
-
-const mockFetchRestaurants = jest.fn();
-const mockResetError = jest.fn();
-
-beforeEach(() => {
-  useRestaurants.useRestaurantSearch.mockReturnValue({
-    loading: false,
-    error: null,
-    fetchRestaurants: mockFetchRestaurants,
-    resetError: mockResetError,
-  });
-  mockFetchRestaurants.mockClear();
-  mockResetError.mockClear();
-});
-
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 import Search from './Search';
+import { setPostcode } from '@/redux/slices/restaurantSlice';
+
+const middlewares = [];
+const mockStore = configureStore(middlewares);
 
 describe('Search component', () => {
+  let store;
+  let dispatch;
+
+  beforeEach(() => {
+    store = mockStore({
+      restaurants: {
+        postcode: '',
+        loading: false,
+      },
+    });
+    dispatch = jest.fn();
+    store.dispatch = dispatch;
+  });
+
+  function renderWithProvider(ui) {
+    return render(<Provider store={store}>{ui}</Provider>);
+  }
+
   it('renders input and button', () => {
-    render(<Search />);
-    expect(screen.getByPlaceholderText(/Enter UK postcode/i)).toBeInTheDocument();
+    renderWithProvider(<Search />);
+    expect(screen.getByPlaceholderText(/Enter UK Postcode/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
   });
 
   it('shows validation error if input is empty and button is clicked', () => {
-    render(<Search />);
+    renderWithProvider(<Search />);
     fireEvent.click(screen.getByRole('button', { name: /search/i }));
     expect(screen.getByText(/Postcode is required/i)).toBeInTheDocument();
-    expect(mockFetchRestaurants).not.toHaveBeenCalled();
+    expect(dispatch).not.toHaveBeenCalled();
   });
 
-  it('calls fetchRestaurants with trimmed input when form is submitted', () => {
-    render(<Search />);
-    const input = screen.getByPlaceholderText(/Enter UK postcode/i);
+  it('dispatches setPostcode with trimmed input on submit', () => {
+    renderWithProvider(<Search />);
+    const input = screen.getByPlaceholderText(/Enter UK Postcode/i);
     fireEvent.change(input, { target: { value: '  EC1A 1BB  ' } });
     fireEvent.click(screen.getByRole('button', { name: /search/i }));
-    expect(mockFetchRestaurants).toHaveBeenCalledWith('EC1A 1BB');
+    expect(dispatch).toHaveBeenCalledWith(setPostcode('EC1A 1BB'));
   });
 
   it('disables button when loading', () => {
-    useRestaurants.useRestaurantSearch.mockReturnValue({
-      loading: true,
-      error: null,
-      fetchRestaurants: mockFetchRestaurants,
-      resetError: mockResetError,
+    store = mockStore({
+      restaurants: {
+        postcode: '',
+        loading: true,
+      },
     });
-    render(<Search />);
+    // Override dispatch again for new store instance
+    store.dispatch = jest.fn();
+    render(
+      <Provider store={store}>
+        <Search loading={true} />
+      </Provider>
+    );
     expect(screen.getByRole('button', { name: /search/i })).toBeDisabled();
-  });
-
-  it('calls resetError if fetchError exists and input changes', () => {
-    useRestaurants.useRestaurantSearch.mockReturnValue({
-      loading: false,
-      error: 'Something bad happened',
-      fetchRestaurants: mockFetchRestaurants,
-      resetError: mockResetError,
-    });
-    render(<Search />);
-    const input = screen.getByPlaceholderText(/Enter UK postcode/i);
-    fireEvent.change(input, { target: { value: 'SW1A 1AA' } });
-    expect(mockResetError).toHaveBeenCalled();
   });
 });

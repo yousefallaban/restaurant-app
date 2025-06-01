@@ -1,0 +1,15 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  width: 100%;
+  padding: 24px 0;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include tablet-up {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

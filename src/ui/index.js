@@ -1,4 +1,5 @@
 import Button from './button/Button.jsx';
-import Input  from './input/Input.jsx';
+import Input from './input/Input.jsx';
+import Image from './image/Image.jsx';
 
-export { Button, Input };
+export { Button, Input, Image };

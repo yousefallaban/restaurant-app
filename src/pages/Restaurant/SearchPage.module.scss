@@ -4,6 +4,8 @@
   gap: 0;
   align-items: start;
   min-height: 100vh;
+  max-width: 1248px;
+  margin: auto;
 
   @include tablet-up {
     grid-template-columns: 320px 1fr;
@@ -13,7 +15,7 @@
 
 .sidebar {
   background: #fff;
-  padding: 24px 16px;
+  padding: 24px 0;
   position: static;
   height: auto;
 

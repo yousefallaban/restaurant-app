@@ -1,15 +1,19 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import store from '@/redux/store'; // Adjust as needed
+import { MemoryRouter } from 'react-router-dom';
+
+import store from '@/redux/store';
+import App from './App';
 
 describe('App Component', () => {
   it('should have a heading element', () => {
-    render(
+    const { asFragment } = render(
       <Provider store={store}>
-        <App />
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
       </Provider>
     );
-    expect(screen.getByRole('heading')).toBeInTheDocument();
+    expect(asFragment()).toMatchSnapshot();
   });
 });

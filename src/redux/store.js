@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import restaurantReducer from './slices/restaurantSlice';
-import { watchFetchRestaurants } from './sagas/restaurantSaga';
+import { watchRestaurants } from './sagas/restaurantSaga';
 import { all } from 'redux-saga/effects';
 
 function* rootSaga() {
-  yield all([watchFetchRestaurants()]);
+  yield all([watchRestaurants()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();

@@ -1,40 +1,34 @@
-import React, { useEffect, useState, useId } from 'react';
-import { useRestaurantSearch } from '@/hooks/useRestaurants.js';
-import { Input, Button } from '../../ui';
+import React, { useState, useEffect, useId } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setPostcode } from '@/redux/slices/restaurantSlice.js';
+import { Input, Button } from '@/ui';
 
 import styles from './Search.module.scss';
 
-const Search = () => {
-  const [postcode, setPostcode] = useState('');
+const Search = ({ loading }) => {
+  const { postcode } = useSelector((state) => state.restaurants);
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState(postcode || '');
   const [validationError, setValidationError] = useState('');
-  const {
-    loading,
-    error: fetchError,
-    fetchRestaurants,
-    resetError,
-  } = useRestaurantSearch();
   const id = useId();
 
   useEffect(() => {
-    if (fetchError) {
-      resetError();
-    }
+    setInputValue(postcode || '');
   }, [postcode]);
 
   const handleChange = (e) => {
-    setPostcode(e.target.value);
+    setInputValue(e.target.value);
     if (validationError) setValidationError('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!postcode.trim()) {
+    if (!inputValue.trim()) {
       setValidationError('Postcode is required');
       return;
     }
-
-    fetchRestaurants(postcode.trim());
+    dispatch(setPostcode(inputValue.trim()));
   };
 
   return (
@@ -43,8 +37,8 @@ const Search = () => {
         id={`postcode-${id}`}
         name="postcode"
         type="text"
-        placeholder="Enter UK postcode (e.g. EC1A 1BB)"
-        value={postcode}
+        placeholder="Enter UK Postcode"
+        value={inputValue}
         onChange={handleChange}
         helperText={validationError}
       />
@@ -54,4 +48,5 @@ const Search = () => {
     </form>
   );
 };
-export default Search
+
+export default Search;
