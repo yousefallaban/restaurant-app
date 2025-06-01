@@ -35,4 +35,14 @@
   }
 }
 
-
+.dropdownIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bbb;
+  pointer-events: none;
+  font-size: 1em;
+  z-index: 1;
+  transition: color 0.18s;
+}

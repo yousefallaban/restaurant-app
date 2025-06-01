@@ -7,6 +7,7 @@ const initialState = {
   postcode: '',
   page: 1,
   pageSize: 18,
+  sort: '',
   filters: {
     query: '',
   },
@@ -49,6 +50,14 @@ const restaurantSlice = createSlice({
     clearFilters(state) {
       state.filters = {};
     },
+    setSort(state, action) {
+      state.sort = action.payload;
+      state.page = 1;
+    },
+    clearSort(state) {
+      state.sort = '';
+      state.page = 1;
+    }
   },
 });
 
@@ -61,6 +70,8 @@ export const {
   clearError,
   setFilter,
   clearFilters,
+  setSort,
+  clearSort,
 } = restaurantSlice.actions;
 
 export default restaurantSlice.reducer;

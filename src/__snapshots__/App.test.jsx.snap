@@ -15,14 +15,18 @@ exports[`App Component should have a heading element 1`] = `
           <div
             class="inputGroup"
           >
-            <input
-              class="inputField"
-              id="postcode-«r0»"
-              name="postcode"
-              placeholder="Enter UK Postcode"
-              type="text"
-              value=""
-            />
+            <div
+              class="inputWrapper"
+            >
+              <input
+                class="inputField"
+                id="postcode-«r0»"
+                name="postcode"
+                placeholder="Enter UK Postcode"
+                type="text"
+                value=""
+              />
+            </div>
           </div>
           <button
             class="buttonBase filled"
@@ -37,14 +41,60 @@ exports[`App Component should have a heading element 1`] = `
       class="mainContent"
     >
       <div
-        class="inputGroup"
+        style="display: flex; gap: 1rem;"
       >
-        <input
-          class="inputField"
-          placeholder="Filter by name or cuisine…"
-          type="text"
-          value=""
-        />
+        <div
+          class="inputGroup"
+        >
+          <div
+            class="inputWrapper"
+          >
+            <input
+              class="inputField"
+              placeholder="Filter by name or cuisine or place"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="dropdownGroup"
+        >
+          <div
+            class="dropdownWrapper"
+          >
+            <select
+              class="dropdownField"
+            >
+              <option
+                value=""
+              >
+                Sort by
+              </option>
+              <option
+                value="rating"
+              >
+                Reviews
+              </option>
+              <option
+                value="driveDistanceMeters"
+              >
+                Delivery time
+              </option>
+              <option
+                value="minimumDeliveryValue"
+              >
+                Delivery cost
+              </option>
+            </select>
+            <span
+              aria-hidden="true"
+              class="dropdownIcon"
+            >
+              ▾
+            </span>
+          </div>
+        </div>
       </div>
     </main>
   </div>

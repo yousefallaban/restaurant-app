@@ -1,54 +1,32 @@
 import React from 'react';
 import clsx from 'clsx';
+import { DEFAULT_OPTIONS } from '@/constant.js';
+
 import styles from './Dropdown.module.scss';
 
-const DEFAULT_OPTIONS = [
-  {
-    value: 'rating',
-    label: 'Reviews',
-  },
-  {
-    value: 'driveDistanceMeters',
-    label: 'Delivery time',
-  },
-  {
-    value: 'minimumDeliveryValue',
-    label: 'Delivery cost',
-  },
-];
-export default function Dropdown({
+const Dropdown = ({
   id,
   value,
   onChange,
   options = DEFAULT_OPTIONS,
   className = '',
-  placeholder = 'Best match',
-}) {
-  return (
-    <div className={clsx(styles.dropdownGroup, className)}>
-      <div className={styles.dropdownWrapper}>
-        <select
-          id={id}
-          value={value}
-          onChange={onChange}
-          className={styles.dropdownField}
-        >
-          <option value="" disabled>
-            {placeholder}
+}) => (
+  <div className={clsx(styles.dropdownGroup, className)}>
+    <div className={styles.dropdownWrapper}>
+      <select
+        id={id}
+        value={value}
+        onChange={onChange}
+        className={styles.dropdownField}
+      >
+        {options.map((opt) =>(
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
           </option>
-          {options.map((opt) =>
-            typeof opt === 'string' ? (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ) : (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            )
-          )}
-        </select>
-      </div>
+        ))}
+      </select>
+      <span className={styles.dropdownIcon} aria-hidden="true">&#9662;</span>
     </div>
-  );
-}
+  </div>
+);
+export default Dropdown

@@ -1,12 +1,14 @@
-import { Dropdown } from '@/ui/index.js';
+import RestaurantControls from '@/components/Filteres/RestaurantControls.jsx';
+import { useFilteredRestaurants } from '@/hooks/useFilteredRestaurants.js';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
+import { Dropdown } from '@/ui/index.js';
 import NotFound from '@/components/NotFound/NotFound.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
 import useSyncUrlToRedux from '@/hooks/useSyncUrlToRedux.js';
 import Restaurants from '@/components/Restaurants/Restaurants.jsx';
 import Sidebar from '@/components/Sidebar/Sidebar.jsx';
-import RestaurantFilter from '@/components/Filteres/RestaurantFilter.jsx';
 
 import styles from './SearchPage.module.scss';
 
@@ -19,10 +21,7 @@ const SearchPage = () => {
         <Sidebar />
       </aside>
       <main className={styles.mainContent}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-          <RestaurantFilter />
-          <Dropdown />
-        </div>
+        <RestaurantControls />
         <Restaurants />
         <NotFound />
         <Pagination />
