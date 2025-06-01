@@ -1,12 +1,20 @@
-# React + Vite
+# Restaurant Finder (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal app to search, filter, sort, and paginate restaurants by postcode.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔍 Search by UK postcode (fetches real API)
+- ✨ Filter by name, cuisine, city, or address
+- ↕️ Sort by reviews, delivery time, or delivery cost
+- 📄 Pagination with page controls
+- 🏗 Built with React 19, Redux Toolkit, Redux Saga, SCSS Modules, and Vite
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+
+cp .env.example .env
+npm install
+npm run dev
+npm run test
